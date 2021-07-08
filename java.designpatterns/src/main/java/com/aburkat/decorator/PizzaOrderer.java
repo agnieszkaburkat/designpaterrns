@@ -6,15 +6,15 @@ import java.util.concurrent.atomic.AtomicReference;
 public class PizzaOrderer {
 
   public static void main(String[] args) {
-    Optional<Integer> pizzaType = Optional.empty();
+    Integer pizzaType;
     List<Integer> addons = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
-    getPizzaType(scanner, pizzaType);
+    pizzaType = getPizzaType(scanner);
     getPizzaAddons(scanner, addons);
 
-    Pizza pizza = generateOrder(pizzaType.get(), addons);
-    System.out.println("you order costs: " + pizza.getPrice());
+    Pizza pizza = generateOrder(pizzaType, addons);
+    System.out.println("you ordered: " + pizza.getPizzaComposition() + "\nyou order costs: " + pizza.getPrice());
   }
 
   static Pizza generateOrder(Integer integer, List<Integer> addons) {
@@ -24,18 +24,20 @@ public class PizzaOrderer {
     return pizza.get();
   }
 
-  private static void getPizzaType(Scanner scanner, Optional<Integer> pizzaType) {
+  private static int getPizzaType(Scanner scanner) {
+    Optional<Integer> pizzaType;
     do {
       pizzaType = readPizzaType(scanner);
     } while (!pizzaType.isPresent());
+    return pizzaType.get();
   }
 
   private static Optional<Integer> readPizzaType(Scanner scanner) {
     try {
       System.out.println("please choose which pizza you'd like to order (press the number of pizza you'd like to order): \n" +
           "1 - Szamanka\n" +
-          "2 - Margherita\n" +
-          "3 - Cotto\n");
+          "2 - Cotto\n" +
+          "3 - Margherita\n");
       return Optional.of(scanner.nextInt());
     } catch (InputMismatchException ex) {
       System.out.println("please type the number of pizza, otherwise I cannot proceed with the order.");
@@ -56,10 +58,10 @@ public class PizzaOrderer {
   private static Optional<Integer> getAddon(Scanner scanner) {
     try {
       System.out.println("Would you like to have some extras on your pizza? \n" +
-          "1 - Extra cheese\n" +
-          "2 - Extra olive\n" +
-          "3 - Vege option\n" +
-          "0 - nothing more to be added :)");
+          "1 - Extra olive\n" +
+          "2 - Extra cheese\n" +
+          "3 - Vegan option\n" +
+          "0 - nothing more to be added, finishing the order :)");
       return Optional.of(scanner.nextInt());
     } catch (InputMismatchException ex) {
       System.out.println("please type the number of extras, otherwise I cannot proceed with the order.");

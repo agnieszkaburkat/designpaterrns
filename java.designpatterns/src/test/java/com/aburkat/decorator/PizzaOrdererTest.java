@@ -33,4 +33,24 @@ class PizzaOrdererTest {
     assertThat(pizza.getPizzaComposition()).isEqualTo("Pizza Szamanka with doubled cheese with extra olive with vegan ingredients");
     assertThat(pizza.getPrice()).isEqualTo(38);
   }
+
+  @Test
+  void testIfOrderCreatedCorrectly_CottoPizzaWithExtraCheeseTwoTimes() {
+    final Pizza pizza = PizzaOrderer.generateOrder(3, new ArrayList() {{
+      add(2);
+      add(2);
+    }});
+    assertThat(pizza.getPizzaComposition()).isEqualTo("Pizza Margherita with doubled cheese with doubled cheese");
+    assertThat(pizza.getPrice()).isEqualTo(33);
+  }
+
+  @Test
+  void testIfOrderCreatedCorrectly_CottoPizzaWithExtraOliveTwoTimes() {
+    final Pizza pizza = PizzaOrderer.generateOrder(3, new ArrayList() {{
+      add(1);
+      add(1);
+    }});
+    assertThat(pizza.getPizzaComposition()).isEqualTo("Pizza Margherita with extra olive with extra olive");
+    assertThat(pizza.getPrice()).isEqualTo(31);
+  }
 }
