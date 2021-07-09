@@ -5,6 +5,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class PizzaOrderer {
 
+  /**
+   * We want to leave our design open for new types but closed in the sense that we don't want to touch existing code.
+   * Let's look at this principle in a little more detail. Again, the open-closed principle says that code should
+   * be open for extension but closed for modification. If we can do that, we have flexibility and maintainability
+   * because we can add new behavior but without the risk of introducing new bugs into the code we've already written.
+   * So our goal is to have designs that we can augment at any time but do it without touching existing code.
+   *
+   */
   public static void main(String[] args) {
     Integer pizzaType;
     List<Integer> addons = new ArrayList<>();
